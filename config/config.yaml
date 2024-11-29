@@ -1,0 +1,120 @@
+development:
+  database:
+    main:
+      type: postgresql
+      host: localhost
+      port: 5432
+      database: lvlhub_dev
+      user: postgres
+      password: ""
+    analytics:
+      type: mongodb
+      uri: mongodb://localhost:27017
+      database: lvlhub_analytics_dev
+
+  cache:
+    type: redis
+    host: localhost
+    port: 6379
+    db: 0
+    password: ""
+
+  security:
+    jwt:
+      secret: your-dev-secret-key
+      algorithm: HS256
+      expiry: 3600
+    oauth:
+      google:
+        client_id: ""
+        client_secret: ""
+      github:
+        client_id: ""
+        client_secret: ""
+    encryption:
+      key: your-dev-encryption-key
+      algorithm: AES-256-GCM
+
+  monitoring:
+    performance:
+      metrics_interval: 60
+      retention_days: 30
+    logging:
+      level: DEBUG
+      format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+production:
+  database:
+    main:
+      type: postgresql
+      host: ${DB_HOST}
+      port: ${DB_PORT}
+      database: ${DB_NAME}
+      user: ${DB_USER}
+      password: ${DB_PASSWORD}
+    analytics:
+      type: mongodb
+      uri: ${MONGODB_URI}
+      database: lvlhub_analytics
+
+  cache:
+    type: redis
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    db: 0
+    password: ${REDIS_PASSWORD}
+
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      algorithm: HS256
+      expiry: 3600
+    oauth:
+      google:
+        client_id: ${GOOGLE_CLIENT_ID}
+        client_secret: ${GOOGLE_CLIENT_SECRET}
+      github:
+        client_id: ${GITHUB_CLIENT_ID}
+        client_secret: ${GITHUB_CLIENT_SECRET}
+    encryption:
+      key: ${ENCRYPTION_KEY}
+      algorithm: AES-256-GCM
+
+  monitoring:
+    performance:
+      metrics_interval: 60
+      retention_days: 90
+    logging:
+      level: INFO
+      format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+testing:
+  database:
+    main:
+      type: sqlite
+      database: ":memory:"
+    analytics:
+      type: mongodb
+      uri: mongodb://localhost:27017
+      database: lvlhub_analytics_test
+
+  cache:
+    type: memory
+    max_size: 1000
+
+  security:
+    jwt:
+      secret: test-secret-key
+      algorithm: HS256
+      expiry: 3600
+    encryption:
+      key: test-encryption-key
+      algorithm: AES-256-GCM
+
+  monitoring:
+    performance:
+      metrics_interval: 1
+      retention_days: 1
+    logging:
+      level: DEBUG
+      format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
